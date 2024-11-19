@@ -1,3 +1,3 @@
 pub trait command {
-    fn command(&self) -> i32;
+    fn execute(&self, rover:Rover) -> i32;
 }
