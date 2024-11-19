@@ -35,7 +35,7 @@ pub struct TurnLeft;
 
 impl Action for TurnLeft {
     fn execute(&mut self, rover: &mut Rover) {
-        rover.direction.turn_left();
+        rover.direction = rover.direction.turn_left();
     }
 }
 
@@ -43,6 +43,6 @@ pub struct TurnRight;
 
 impl Action for TurnRight {
     fn execute(&mut self, rover: &mut Rover) {
-        rover.direction.turn_right();
+        rover.direction = rover.direction.turn_right();
     }
 }
