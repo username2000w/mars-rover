@@ -1,22 +1,23 @@
 mod position;
 mod direction;
+mod action;
 
 use position::Position;
 use direction::Direction;
+use action::Action;
 
-struct Rover {
-    position: Position,
-    direction: Direction,
-    command: Command,
+pub struct Rover {
+    pub position: Position,
+    pub direction: Direction,
+    pub action: Box<dyn Action>, // Utilisation d'un pointeur pour un trait dynamique
 }
 
 impl Rover {
-    fn execute() {
-        let value = command::execute();
+    pub fn execute(&self) -> i32 {
+        self.action.execute(&self.direction, &self.position) // Appel du trait
     }
 }
 
 pub fn print_rover() {
     println!("Hello, Rover!");
 }
-
