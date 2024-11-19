@@ -1,4 +1,4 @@
-enum direction {
+pub enum Direction {
     North,
     East,
     South,
