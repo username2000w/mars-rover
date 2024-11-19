@@ -1,11 +1,16 @@
-mod command;
+mod action;
+
 
 struct moveforward {
 
 }
 
-impl command for moveforward{
+impl Action for moveforward{
     fn execute(&self, rover:Rover) -> i32 {
+        let mut position = rover.position;
+        let direction = rover.direction;
+
+
         return ;
     }
 } 
