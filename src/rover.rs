@@ -1,10 +1,8 @@
 pub mod position;
 pub mod direction;
-mod action;
 
 use position::Position;
 use direction::Direction;
-use action::Action;
 
 pub struct Rover {
     pub position: Position,
@@ -63,8 +61,4 @@ impl Rover {
 
         return 0;
     }
-}
-
-pub fn print_rover() {
-    println!("Hello, Rover!");
 }
