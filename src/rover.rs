@@ -1,5 +1,5 @@
-mod position;
-mod direction;
+pub mod position;
+pub mod direction;
 mod action;
 
 use position::Position;
@@ -9,59 +9,59 @@ use action::Action;
 pub struct Rover {
     pub position: Position,
     pub direction: Direction,
-    pub action: Box<dyn Action>, // Utilisation d'un pointeur pour un trait dynamique
+    // pub action: Box<dyn Action>, // Utilisation d'un pointeur pour un trait dynamique
 }
 
 impl Rover {
+    pub fn new(direction: Direction, position: Position) -> Rover {
+        Rover { direction, position }
+    }
+
     // pub fn execute(&self) -> i32 {
     //     self.action.execute(&self.direction, &self.position) // Appel du trait
     // }
-    pub fn moveForward(&mut self, position:Position , direction:Direction) -> i32 {
-        self.position = match direction {
-            Direction::North => Position::new(position.x, position.y + 1),
-            Direction::East => Position::new(position.x + 1, position.y),
-            Direction::South => Position::new(position.x, position.y - 1),
-            Direction::West => Position::new(position.x - 1, position.y),
+    pub fn move_forward(&mut self) -> i32 {
+        self.position = match self.direction {
+            Direction::North => Position::new(self.position.x, self.position.y + 1),
+            Direction::East => Position::new(self.position.x + 1, self.position.y),
+            Direction::South => Position::new(self.position.x, self.position.y - 1),
+            Direction::West => Position::new(self.position.x - 1, self.position.y),
         };
 
         return 0;
-
     }
 
-    pub fn moveBackward(&mut self, position:Position , direction:Direction) -> i32 {
-        self.position = match direction {
-            Direction::North => Position::new(position.x, position.y - 1),
-            Direction::East => Position::new(position.x - 1, position.y),
-            Direction::South => Position::new(position.x, position.y + 1),
-            Direction::West => Position::new(position.x + 1, position.y),
+    pub fn move_backward(&mut self) -> i32 {
+        self.position = match self.direction {
+            Direction::North => Position::new(self.position.x, self.position.y - 1),
+            Direction::East => Position::new(self.position.x - 1, self.position.y),
+            Direction::South => Position::new(self.position.x, self.position.y + 1),
+            Direction::West => Position::new(self.position.x + 1, self.position.y),
         };
 
         return 0;
-
     }
 
-    pub fn moveleft(&mut self, position:Position , direction:Direction) -> i32 {
-        self.position = match direction {
-            Direction::North => Position::new(position.x - 1, position.y),
-            Direction::East => Position::new(position.x, position.y + 1),
-            Direction::South => Position::new(position.x + 1, position.y),
-            Direction::West => Position::new(position.x, position.y - 1),
+    pub fn turn_left(&mut self) -> i32 {
+        self.direction = match self.direction {
+            Direction::North => Direction::West,
+            Direction::West => Direction::South,
+            Direction::South => Direction::East,
+            Direction::East => Direction::North
         };
 
         return 0;
-
     }
 
-    pub fn moveRight(&mut self, position:Position , direction:Direction) -> i32 {
-        self.position = match direction {
-            Direction::North => Position::new(position.x + 1, position.y),
-            Direction::East => Position::new(position.x, position.y - 1),
-            Direction::South => Position::new(position.x - 1, position.y),
-            Direction::West => Position::new(position.x, position.y + 1),
+    pub fn turn_right(&mut self) -> i32 {
+        self.direction = match self.direction {
+            Direction::North => Direction::East,
+            Direction::East => Direction::South,
+            Direction::South => Direction::West,
+            Direction::West => Direction::North
         };
 
         return 0;
-
     }
 }
 
